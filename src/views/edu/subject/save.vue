@@ -27,7 +27,7 @@
             style="margin-left: 10px;"
             size="small"
             type="success"
-            @click="submitUpload">上传到服务器</el-button>
+            @click="submitUpload">上传</el-button>
         </el-upload>
       </el-form-item>
     </el-form>
