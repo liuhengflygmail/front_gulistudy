@@ -21,28 +21,28 @@ export default {
   data() {
     return {
       filterText: '',
-      data2: [],  //返回所有分类数据
+      data2: [], // 返回所有分类数据
       defaultProps: {
         children: 'children',
         label: 'title'
       }
     }
   },
-  created() {
-      this.getAllSubjectList()
-  },
   watch: {
     filterText(val) {
       this.$refs.tree2.filter(val)
     }
   },
+  created() {
+    this.getAllSubjectList()
+  },
 
   methods: {
     getAllSubjectList() {
-        subject.getSubjectList()
-            .then(response => {
-                this.data2 = response.data.list
-            })
+      subject.getSubjectList()
+        .then(response => {
+          this.data2 = response.data.list
+        })
     },
     filterNode(value, data) {
       if (!value) return true

@@ -22,17 +22,17 @@
 export default {
   data() {
     return {
-      saveBtnDisabled: false, // 保存按钮是否禁用
-    };
+      saveBtnDisabled: false // 保存按钮是否禁用
+    }
   },
   created() {
-    console.log("info created");
+    console.log('info created')
   },
   methods: {
     next() {
-      console.log("next");
-      this.$router.push({ path: "/edu/course/chapter/1" });
-    },
-  },
-};
+      console.log('next')
+      this.$router.push({ path: '/edu/course/chapter/1' })
+    }
+  }
+}
 </script>

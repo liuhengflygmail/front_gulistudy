@@ -23,21 +23,21 @@
 export default {
   data() {
     return {
-      saveBtnDisabled: false, // 保存按钮是否禁用
-    };
+      saveBtnDisabled: false // 保存按钮是否禁用
+    }
   },
   created() {
-    console.log("chapter created");
+    console.log('chapter created')
   },
   methods: {
     previous() {
-      console.log("previous");
-      this.$router.push({ path: "/edu/course/info/1" });
+      console.log('previous')
+      this.$router.push({ path: '/edu/course/info/1' })
     },
     next() {
-      console.log("next");
-      this.$router.push({ path: "/edu/course/publish/1" });
-    },
-  },
-};
+      console.log('next')
+      this.$router.push({ path: '/edu/course/publish/1' })
+    }
+  }
+}
 </script>
