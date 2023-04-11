@@ -13,7 +13,17 @@
       </el-form-item>
 
       <!-- 所属分类 TODO -->
-
+      <el-form-item label="课程分类">
+        <el-select
+          v-model="courseInfo.subjectParentId"
+          placeholder="请选择一级分类">
+          <el-option
+            v-for="subject in subjectOneList"
+            :key="subject.id"
+            :label="subject.title"
+            :value="subject.id"/>
+        </el-select>
+      </el-form-item>
       <!-- 课程讲师 TODO -->
       <el-form-item label="课程讲师">
         <el-select
@@ -50,27 +60,31 @@
 
 <script>
 import course from '@/api/teacher/course.js'
-
+import subject from '@/api/edu/subject'
 export default {
   data() {
     return {
       saveBtnDisabled: false,
       courseInfo: {
         title: '',
-        subjectId: '',
+        subjectId: '', // 二级分类id
+        subjectParentId: '', // 一级分类id
         teacherId: '',
-        subjectParentId: '',
         lessonNum: 0,
         description: '',
         cover: '',
         price: 0
       },
-      teacherList: [] // 封装所有的讲师
+      teacherList: [], // 封装所有的讲师
+      subjectOneList: [], // 一级分类
+      subjectTwoList: [] // 二级分类
     }
   },
   created() {
     // 初始化所有讲师
     this.getListTeacher()
+    // 初始化一级分类
+    this.getOneSubject()
   },
   methods: {
     saveOrUpdate() {
@@ -91,6 +105,13 @@ export default {
         .then(response => {
           this.teacherList = response.data.items
           console.log(this.teacherList)
+        })
+    },
+    // 查询所有的一级分类
+    getOneSubject() {
+      subject.getSubjectList()
+        .then(response => {
+          this.subjectOneList = response.data.list
         })
     }
   }
