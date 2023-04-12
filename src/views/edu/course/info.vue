@@ -14,14 +14,11 @@
 
       <!-- 所属分类 TODO -->
       <el-form-item label="课程分类">
-        <el-select
-          v-model="courseInfo.subjectParentId"
-          placeholder="请选择一级分类">
-          <el-option
-            v-for="subject in subjectOneList"
-            :key="subject.id"
-            :label="subject.title"
-            :value="subject.id"/>
+        <el-select v-model="courseInfo.subjectParentId" placeholder="一级分类" @change="subjectLevelOneChanged">
+          <el-option v-for="subject in subjectOneList" :key="subject.id" :label="subject.title" :value="subject.id"/>
+        </el-select>
+        <el-select v-model="courseInfo.subjectId" placeholder="二级分类">
+          <el-option v-for="subject in subjectTwoList" :key="subject.id" :label="subject.title" :value="subject.id"/>
         </el-select>
       </el-form-item>
       <!-- 课程讲师 TODO -->
@@ -87,6 +84,21 @@ export default {
     this.getOneSubject()
   },
   methods: {
+    // 点击某个一级分类,触发change,显示对应二级分类
+    subjectLevelOneChanged(value) {
+      // value就是一级分类的id值
+      // 遍历所有分类,包含一级和二级
+      for (let i = 0; i < this.subjectOneList.length; i++) {
+        // 每个一级分类
+        // 判断:所有一级分类id 和 点击一级分类id是否一样
+        if (this.subjectOneList[i].id === value) {
+          // 从一级分类获取里面所有的二级分类
+          this.subjectTwoList = this.subjectOneList[i].children
+          // 把二级分类id值清空
+          this.courseInfo.subjectId = ''
+        }
+      }
+    },
     saveOrUpdate() {
       course.addCourseInfo(this.courseInfo).then(resp => {
         // 提示
